@@ -2,14 +2,13 @@ import streamlit as st
 from utils import lesson_ui, create_code_executor, create_exercise
 
 def lesson_content():
-    st.markdown("""
-    # Data Types
+    st.markdown("# Data Types")
     
-    Python has several built-in data types. In this lesson, we'll explore the fundamental ones:
+    st.markdown("""Python has several built-in data types. In this lesson, we'll explore the fundamental ones:""")
     
-    ## Numbers
+    st.markdown("## Numbers")
     
-    Python supports two types of numbers:
+    st.markdown("""Python supports two types of numbers:
     
     1. **Integers (int)**: Whole numbers without a decimal point
     2. **Floating-point numbers (float)**: Numbers with a decimal point
@@ -40,12 +39,10 @@ print("Product:", product)
     st.markdown("Try it yourself:")
     create_code_executor(code1)
     
-    st.markdown("""
-    ## Strings
+    st.markdown("## Strings")
     
-    Strings are sequences of characters enclosed in quotes. Python allows single (`'`), 
-    double (`"`), or triple quotes (`'''` or `"""`) for strings.
-    """)
+    st.markdown("""Strings are sequences of characters enclosed in quotes. Python allows single (`'`), 
+    double (`"`), or triple quotes (`'''` or `"""`) for strings.""")
     
     code2 = """# Creating strings
 name = "Alice"
@@ -83,11 +80,9 @@ print("Length of name:", len(name))
     st.markdown("Try string operations:")
     create_code_executor(code2)
     
-    st.markdown("""
-    ### String Methods
+    st.markdown("### String Methods")
     
-    Python provides many useful methods for working with strings:
-    """)
+    st.markdown("Python provides many useful methods for working with strings:")
     
     code3 = """text = "Python Programming"
 
@@ -154,11 +149,9 @@ else:
     st.markdown("Try boolean operations:")
     create_code_executor(code4)
     
-    st.markdown("""
-    ## Type Conversion
+    st.markdown("## Type Conversion")
     
-    Python allows you to convert between different data types:
-    """)
+    st.markdown("Python allows you to convert between different data types:")
     
     code5 = """# Convert string to integer
 age_str = "25"

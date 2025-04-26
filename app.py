@@ -48,6 +48,8 @@ from the absolute basics to intermediate concepts in a structured and interactiv
 - **Data Structures**: Lists, Dictionaries, Tuples, and Sets
 - **File Operations**: Reading and Writing Files
 - **Error Handling**: Try/Except Statements
+- **Data Visualization**: Charts, Graphs, and Visual Representations
+- **Data Analysis**: Data Manipulation, Transformation, and Statistical Analysis
 
 Let's get started by selecting a lesson from the sidebar!
 """)
@@ -63,7 +65,9 @@ lessons = [
     "Functions", 
     "Data Structures", 
     "File Operations", 
-    "Error Handling"
+    "Error Handling",
+    "Data Visualization",
+    "Data Analysis"
 ]
 
 # Create a progress bar
