@@ -108,13 +108,15 @@ print("Hello,", name)
     
     st.markdown("## Exercise: Your First Program")
     
-    exercise_solution = """your_name = "Python Learner"
+    # Define the solution separately 
+    solution = '''your_name = "Python Learner"
 your_age = 25
-print("My name is", your_name, "and I am", your_age, "years old.")"""
+print("My name is", your_name, "and I am", your_age, "years old.")'''
     
+    # Pass the solution to the exercise function
     exercise_passed = create_exercise(
         "Create a program that defines two variables: your_name and your_age, then prints a message saying 'My name is [your_name] and I am [your_age] years old.'",
-        exercise_solution
+        solution
     )
     
     return exercise_passed
