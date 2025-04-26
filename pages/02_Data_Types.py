@@ -41,8 +41,7 @@ print("Product:", product)
     
     st.subheader("Strings")
     
-    st.write("""Strings are sequences of characters enclosed in quotes. Python allows single (`'`), 
-    double (`"`), or triple quotes (`'''` or `"""`) for strings.""")
+    st.write("Strings are sequences of characters enclosed in quotes. Python allows single (`'`), double (`\"`), or triple quotes for strings.")
     
     code2 = """# Creating strings
 name = "Alice"
@@ -137,12 +136,6 @@ print("x != y:", x != y)
 print("AND:", is_active and is_complete)  # True if both are True
 print("OR:", is_active or is_complete)    # True if at least one is True
 print("NOT:", not is_active)              # Inverts the boolean value
-
-# Boolean in conditions
-if is_active:
-    print("The program is active")
-else:
-    print("The program is not active")
 """
     st.code(code4, language="python")
     
@@ -174,10 +167,10 @@ height_int = int(height)
 print("Float to Integer:", height_int, type(height_int))
 
 # Convert to boolean
-print("Bool of 1:", bool(1))        # Any non-zero number is True
-print("Bool of 0:", bool(0))        # 0 is False
-print("Bool of empty string:", bool(""))  # Empty string is False
-print("Bool of non-empty:", bool("hello"))  # Non-empty string is True
+print("Bool of 1:", bool(1))
+print("Bool of 0:", bool(0))
+print("Bool of empty string:", bool(""))
+print("Bool of non-empty:", bool("hello"))
 """
     st.code(code5, language="python")
     
