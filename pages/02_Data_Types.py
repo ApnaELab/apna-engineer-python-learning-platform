@@ -2,13 +2,13 @@ import streamlit as st
 from utils import lesson_ui, create_code_executor, create_exercise
 
 def lesson_content():
-    st.markdown("# Data Types")
+    st.header("Data Types")
     
-    st.markdown("""Python has several built-in data types. In this lesson, we'll explore the fundamental ones:""")
+    st.write("Python has several built-in data types. In this lesson, we'll explore the fundamental ones:")
     
-    st.markdown("## Numbers")
+    st.subheader("Numbers")
     
-    st.markdown("""Python supports two types of numbers:
+    st.write("""Python supports two types of numbers:
     
     1. **Integers (int)**: Whole numbers without a decimal point
     2. **Floating-point numbers (float)**: Numbers with a decimal point
@@ -36,12 +36,12 @@ print("Product:", product)
 """
     st.code(code1, language="python")
     
-    st.markdown("Try it yourself:")
+    st.write("Try it yourself:")
     create_code_executor(code1)
     
-    st.markdown("## Strings")
+    st.subheader("Strings")
     
-    st.markdown("""Strings are sequences of characters enclosed in quotes. Python allows single (`'`), 
+    st.write("""Strings are sequences of characters enclosed in quotes. Python allows single (`'`), 
     double (`"`), or triple quotes (`'''` or `"""`) for strings.""")
     
     code2 = """# Creating strings
@@ -77,12 +77,12 @@ print("Length of name:", len(name))
 """
     st.code(code2, language="python")
     
-    st.markdown("Try string operations:")
+    st.write("Try string operations:")
     create_code_executor(code2)
     
-    st.markdown("### String Methods")
+    st.write("### String Methods")
     
-    st.markdown("Python provides many useful methods for working with strings:")
+    st.write("Python provides many useful methods for working with strings:")
     
     code3 = """text = "Python Programming"
 
@@ -110,12 +110,12 @@ print(new_text)
 """
     st.code(code3, language="python")
     
-    st.markdown("Try string methods:")
+    st.write("Try string methods:")
     create_code_executor(code3)
     
-    st.markdown("## Boolean")
+    st.subheader("Boolean")
     
-    st.markdown("Boolean values represent truth values with two constants: `True` and `False`. They're often used in conditional statements and logical operations.")
+    st.write("Boolean values represent truth values with two constants: `True` and `False`. They're often used in conditional statements and logical operations.")
     
     code4 = """# Boolean values
 is_active = True
@@ -146,12 +146,12 @@ else:
 """
     st.code(code4, language="python")
     
-    st.markdown("Try boolean operations:")
+    st.write("Try boolean operations:")
     create_code_executor(code4)
     
-    st.markdown("## Type Conversion")
+    st.subheader("Type Conversion")
     
-    st.markdown("Python allows you to convert between different data types:")
+    st.write("Python allows you to convert between different data types:")
     
     code5 = """# Convert string to integer
 age_str = "25"
@@ -181,27 +181,31 @@ print("Bool of non-empty:", bool("hello"))  # Non-empty string is True
 """
     st.code(code5, language="python")
     
-    st.markdown("Try type conversion:")
+    st.write("Try type conversion:")
     create_code_executor(code5)
     
-    st.markdown("## Exercises: Data Types")
+    st.subheader("Exercises: Data Types")
     
     # First exercise
-    exercise1_passed = create_exercise(
-        "Create a program that takes a temperature in Celsius (as a float) and converts it to Fahrenheit using the formula: F = C * 9/5 + 32. Store the result in a variable called 'fahrenheit' and print it with a message.",
-        """celsius = 25.0
+    exercise1_solution = """celsius = 25.0
 fahrenheit = celsius * 9/5 + 32
 print(f"Temperature in Fahrenheit: {fahrenheit}")"""
+
+    exercise1_passed = create_exercise(
+        "Create a program that takes a temperature in Celsius (as a float) and converts it to Fahrenheit using the formula: F = C * 9/5 + 32. Store the result in a variable called 'fahrenheit' and print it with a message.",
+        exercise1_solution
     )
     
     # Second exercise
     if exercise1_passed:
-        exercise2_passed = create_exercise(
-            "Create a program that takes a string, converts it to uppercase, and checks if it contains the letter 'A'. Print the result as a boolean value.",
-            """text = "example"
+        exercise2_solution = """text = "example"
 uppercase_text = text.upper()
 contains_a = 'A' in uppercase_text
 print(contains_a)"""
+
+        exercise2_passed = create_exercise(
+            "Create a program that takes a string, converts it to uppercase, and checks if it contains the letter 'A'. Print the result as a boolean value.",
+            exercise2_solution
         )
     else:
         exercise2_passed = False

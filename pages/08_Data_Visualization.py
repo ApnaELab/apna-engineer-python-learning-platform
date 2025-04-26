@@ -1,6 +1,6 @@
 import streamlit as st
-import pandas as pd
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from utils import lesson_ui, create_code_executor, create_exercise
@@ -9,278 +9,549 @@ def lesson_content():
     st.markdown("# Data Visualization in Python")
     
     st.markdown("""
-    Data visualization is a powerful way to understand and communicate insights from your data. 
-    Python offers several excellent libraries for creating visualizations:
+    Data visualization is the graphical representation of data to help understand patterns, trends, and relationships. 
+    Python offers several powerful libraries for creating visualizations.
     
-    - **Matplotlib**: The foundation for most Python plotting libraries
-    - **Seaborn**: Statistical data visualization built on matplotlib
-    - **Pandas**: Built-in plotting functionality for DataFrames
-    - **Plotly**: Interactive visualizations
-    - **Bokeh**: Interactive web visualizations
+    In this lesson, we'll explore:
     
-    In this lesson, we'll focus on Matplotlib, Seaborn, and Pandas for visualizing data.
+    1. **Matplotlib**: The foundation of visualization in Python
+    2. **Seaborn**: Statistical plotting based on Matplotlib
+    3. **Pandas Plotting**: Direct visualization from pandas DataFrames
     """)
     
     st.markdown("## Introduction to Matplotlib")
     
     st.markdown("""
-    Matplotlib is the most widely used Python library for creating static, animated, and interactive visualizations.
-    Let's start with some basic examples:
+    Matplotlib is the most widely used Python library for creating static, animated, and interactive visualizations. 
+    It provides a MATLAB-like interface and works well with NumPy arrays.
+    
+    Let's start with basic plots:
     """)
     
-    # Basic line plot example
     code1 = """import matplotlib.pyplot as plt
 import numpy as np
 
-# Create some data
-x = np.linspace(0, 10, 100)  # 100 points from 0 to 10
-y = np.sin(x)                # sine function
+# Generate some data
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
 
-# Create a figure and axes
+# Create a figure and axis
 plt.figure(figsize=(10, 6))
 
-# Plot the data
-plt.plot(x, y, label='sin(x)')
+# Plot data
+plt.plot(x, y1, label='Sine', color='blue', linewidth=2)
+plt.plot(x, y2, label='Cosine', color='red', linewidth=2, linestyle='--')
 
 # Add labels and title
 plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
-plt.title('Basic Line Plot: Sine Function')
+plt.title('Sine and Cosine Functions')
+
+# Add grid and legend
+plt.grid(True, alpha=0.3)
 plt.legend()
-plt.grid(True)
 
 # Display the plot
+plt.tight_layout()
 plt.show()
 """
     
     st.code(code1, language='python')
     
-    # Execute and display the matplotlib plot directly in Streamlit
-    st.markdown("Output:")
-    
+    # Create the matplotlib example plot
     x = np.linspace(0, 10, 100)
-    y = np.sin(x)
+    y1 = np.sin(x)
+    y2 = np.cos(x)
     
     fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(x, y, label='sin(x)')
+    ax.plot(x, y1, label='Sine', color='blue', linewidth=2)
+    ax.plot(x, y2, label='Cosine', color='red', linewidth=2, linestyle='--')
     ax.set_xlabel('X-axis')
     ax.set_ylabel('Y-axis')
-    ax.set_title('Basic Line Plot: Sine Function')
+    ax.set_title('Sine and Cosine Functions')
+    ax.grid(True, alpha=0.3)
     ax.legend()
-    ax.grid(True)
-    
     st.pyplot(fig)
     
-    st.markdown("Try it yourself (customize the plot as you wish):")
+    st.markdown("Try creating your own plot:")
     create_code_executor(code1)
     
-    st.markdown("## Multiple Plots and Customization")
+    st.markdown("## Common Plot Types with Matplotlib")
     
     st.markdown("""
-    Matplotlib allows you to create multiple plots and customize them in various ways:
+    Matplotlib supports many types of plots. Let's explore some common ones:
     """)
     
+    st.markdown("### Scatter Plot")
     code2 = """import matplotlib.pyplot as plt
 import numpy as np
 
-# Create some data
-x = np.linspace(0, 10, 100)
-y1 = np.sin(x)
-y2 = np.cos(x)
+# Generate random data
+np.random.seed(42)
+x = np.random.rand(50)
+y = np.random.rand(50)
+colors = np.random.rand(50)
+sizes = 1000 * np.random.rand(50)
 
-# Create figure and axes
-plt.figure(figsize=(12, 8))
+# Create scatter plot
+plt.figure(figsize=(10, 6))
+plt.scatter(x, y, c=colors, s=sizes, alpha=0.7, cmap='viridis')
 
-# First subplot
-plt.subplot(2, 1, 1)  # (rows, columns, index)
-plt.plot(x, y1, 'b-', linewidth=2, label='sin(x)')
-plt.title('Sine Function')
-plt.grid(True)
-plt.legend()
-
-# Second subplot
-plt.subplot(2, 1, 2)
-plt.plot(x, y2, 'r--', linewidth=2, label='cos(x)')
-plt.title('Cosine Function')
-plt.grid(True)
-plt.legend()
-
-# Adjust layout and show
-plt.tight_layout()
+plt.colorbar(label='Color Value')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Scatter Plot with Size and Color Variation')
+plt.grid(True, alpha=0.3)
 plt.show()
 """
     
     st.code(code2, language='python')
     
-    st.markdown("Output:")
+    # Create scatter plot example
+    np.random.seed(42)
+    x = np.random.rand(50)
+    y = np.random.rand(50)
+    colors = np.random.rand(50)
+    sizes = 1000 * np.random.rand(50)
     
-    # Multiple plots example
-    x = np.linspace(0, 10, 100)
-    y1 = np.sin(x)
-    y2 = np.cos(x)
-    
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
-    
-    ax1.plot(x, y1, 'b-', linewidth=2, label='sin(x)')
-    ax1.set_title('Sine Function')
-    ax1.grid(True)
-    ax1.legend()
-    
-    ax2.plot(x, y2, 'r--', linewidth=2, label='cos(x)')
-    ax2.set_title('Cosine Function')
-    ax2.grid(True)
-    ax2.legend()
-    
-    plt.tight_layout()
+    fig, ax = plt.subplots(figsize=(10, 6))
+    scatter = ax.scatter(x, y, c=colors, s=sizes, alpha=0.7, cmap='viridis')
+    plt.colorbar(scatter, ax=ax, label='Color Value')
+    ax.set_xlabel('X-axis')
+    ax.set_ylabel('Y-axis')
+    ax.set_title('Scatter Plot with Size and Color Variation')
+    ax.grid(True, alpha=0.3)
     st.pyplot(fig)
     
-    st.markdown("Try creating subplots:")
-    create_code_executor(code2)
-    
-    st.markdown("## Different Types of Plots")
-    
-    st.markdown("""
-    Matplotlib and Seaborn support many different types of visualizations. Here are some common ones:
-    """)
-    
+    st.markdown("### Bar Plot")
     code3 = """import matplotlib.pyplot as plt
 import numpy as np
 
-# Generate data
+# Data for plotting
 categories = ['A', 'B', 'C', 'D', 'E']
-values = [23, 47, 12, 36, 29]
+values = [25, 40, 30, 55, 15]
 
-# Bar chart
+# Create bar plot
 plt.figure(figsize=(10, 6))
-plt.bar(categories, values, color='skyblue')
-plt.title('Bar Chart Example')
+plt.bar(categories, values, color='skyblue', edgecolor='navy')
+
 plt.xlabel('Categories')
 plt.ylabel('Values')
+plt.title('Bar Plot Example')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.show()
-
-# Scatter plot
-plt.figure(figsize=(10, 6))
-x = np.random.rand(50)
-y = x + np.random.normal(0, 0.3, 50)
-plt.scatter(x, y, alpha=0.6, s=100, c='green', edgecolors='black')
-plt.title('Scatter Plot Example')
-plt.xlabel('X values')
-plt.ylabel('Y values')
-plt.grid(True)
-plt.show()
-
-# Pie chart
-plt.figure(figsize=(10, 6))
-plt.pie(values, labels=categories, autopct='%1.1f%%', startangle=90, 
-        shadow=True, explode=[0, 0.1, 0, 0, 0], colors=plt.cm.Paired.colors)
-plt.title('Pie Chart Example')
-plt.axis('equal')  # Equal aspect ratio ensures the pie chart is circular
 plt.show()
 """
     
     st.code(code3, language='python')
     
-    st.markdown("Bar Chart Output:")
-    
-    # Bar chart
+    # Create bar plot example
     categories = ['A', 'B', 'C', 'D', 'E']
-    values = [23, 47, 12, 36, 29]
+    values = [25, 40, 30, 55, 15]
     
     fig, ax = plt.subplots(figsize=(10, 6))
-    ax.bar(categories, values, color='skyblue')
-    ax.set_title('Bar Chart Example')
+    ax.bar(categories, values, color='skyblue', edgecolor='navy')
     ax.set_xlabel('Categories')
     ax.set_ylabel('Values')
+    ax.set_title('Bar Plot Example')
     ax.grid(axis='y', linestyle='--', alpha=0.7)
     st.pyplot(fig)
     
-    st.markdown("Scatter Plot Output:")
-    
-    # Scatter plot
-    fig, ax = plt.subplots(figsize=(10, 6))
-    x = np.random.rand(50)
-    y = x + np.random.normal(0, 0.3, 50)
-    ax.scatter(x, y, alpha=0.6, s=100, c='green', edgecolors='black')
-    ax.set_title('Scatter Plot Example')
-    ax.set_xlabel('X values')
-    ax.set_ylabel('Y values')
-    ax.grid(True)
-    st.pyplot(fig)
-    
-    st.markdown("Pie Chart Output:")
-    
-    # Pie chart
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.pie(values, labels=categories, autopct='%1.1f%%', startangle=90, 
-          shadow=True, explode=[0, 0.1, 0, 0, 0], colors=plt.cm.Paired.colors)
-    ax.set_title('Pie Chart Example')
-    ax.axis('equal')
-    st.pyplot(fig)
-    
-    st.markdown("Try creating these different charts:")
-    create_code_executor(code3)
-    
-    st.markdown("## Data Visualization with Pandas")
-    
-    st.markdown("""
-    Pandas provides convenient plotting functions that build on Matplotlib. Let's see some examples:
-    """)
-    
-    code4 = """import pandas as pd
+    st.markdown("### Histogram")
+    code4 = """import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.pyplot as plt
 
-# Create a DataFrame
-np.random.seed(42)  # For reproducibility
-dates = pd.date_range('20230101', periods=12)
-df = pd.DataFrame({
-    'A': np.random.randn(12).cumsum(),
-    'B': np.random.randn(12).cumsum(),
-    'C': np.random.randn(12).cumsum(),
-    'D': np.random.randn(12).cumsum()
-}, index=dates)
+# Generate random data
+np.random.seed(42)
+data = np.random.normal(0, 1, 1000)  # 1000 points from a normal distribution
 
-print("Sample DataFrame:")
-print(df.head())
+# Create histogram
+plt.figure(figsize=(10, 6))
+plt.hist(data, bins=30, color='green', alpha=0.7, edgecolor='black')
 
-# Line plot with Pandas
-ax = df.plot(figsize=(10, 6), title='Line Plot with Pandas')
-ax.set_xlabel('Date')
-ax.set_ylabel('Value')
-ax.grid(True)
-plt.show()
-
-# Bar plot with Pandas
-ax = df.iloc[0].plot(kind='bar', figsize=(10, 6), color='skyblue', 
-                    title='Bar Plot with Pandas')
-ax.set_xlabel('Column')
-ax.set_ylabel('Value')
-ax.grid(axis='y', linestyle='--', alpha=0.7)
-plt.show()
-
-# Area plot with Pandas
-ax = df.plot.area(figsize=(10, 6), alpha=0.5, title='Area Plot with Pandas')
-ax.set_xlabel('Date')
-ax.set_ylabel('Value')
-ax.grid(True)
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.title('Histogram of Normal Distribution')
+plt.grid(axis='y', alpha=0.3)
 plt.show()
 """
     
     st.code(code4, language='python')
     
-    # Create a sample DataFrame
+    # Create histogram example
     np.random.seed(42)
-    dates = pd.date_range('20230101', periods=12)
-    df = pd.DataFrame({
-        'A': np.random.randn(12).cumsum(),
-        'B': np.random.randn(12).cumsum(),
-        'C': np.random.randn(12).cumsum(),
-        'D': np.random.randn(12).cumsum()
-    }, index=dates)
+    data = np.random.normal(0, 1, 1000)
     
-    st.markdown("Sample DataFrame:")
-    st.dataframe(df.head())
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.hist(data, bins=30, color='green', alpha=0.7, edgecolor='black')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Histogram of Normal Distribution')
+    ax.grid(axis='y', alpha=0.3)
+    st.pyplot(fig)
+    
+    st.markdown("### Pie Chart")
+    code5 = """import matplotlib.pyplot as plt
+
+# Data for pie chart
+labels = ['A', 'B', 'C', 'D', 'E']
+sizes = [15, 30, 25, 10, 20]
+colors = ['gold', 'lightcoral', 'lightskyblue', 'lightgreen', 'lightpink']
+explode = (0.1, 0, 0, 0, 0)  # explode the 1st slice (i.e. 'A')
+
+# Create pie chart
+plt.figure(figsize=(8, 8))
+plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=90)
+
+# Equal aspect ratio ensures that pie is drawn as a circle
+plt.axis('equal')
+plt.title('Pie Chart Example')
+plt.show()
+"""
+    
+    st.code(code5, language='python')
+    
+    # Create pie chart example
+    labels = ['A', 'B', 'C', 'D', 'E']
+    sizes = [15, 30, 25, 10, 20]
+    colors = ['gold', 'lightcoral', 'lightskyblue', 'lightgreen', 'lightpink']
+    explode = (0.1, 0, 0, 0, 0)
+    
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.pie(sizes, explode=explode, labels=labels, colors=colors,
+           autopct='%1.1f%%', shadow=True, startangle=90)
+    ax.axis('equal')
+    ax.set_title('Pie Chart Example')
+    st.pyplot(fig)
+    
+    st.markdown("Try creating these different types of plots:")
+    create_code_executor(code3)  # Using the bar plot example as default
+    
+    st.markdown("## Subplots and Multiple Figures")
+    
+    st.markdown("""
+    Matplotlib allows you to create multiple plots in a single figure using subplots:
+    """)
+    
+    code6 = """import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate data
+x = np.linspace(0, 5, 100)
+y1 = np.sin(x)
+y2 = np.exp(-x)
+y3 = x**2
+y4 = np.log(x + 1)
+
+# Create a figure with 2x2 subplots
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+
+# Plot on each subplot
+axes[0, 0].plot(x, y1, 'b-')
+axes[0, 0].set_title('Sine Function')
+axes[0, 0].set_xlabel('x')
+axes[0, 0].set_ylabel('sin(x)')
+axes[0, 0].grid(True)
+
+axes[0, 1].plot(x, y2, 'r-')
+axes[0, 1].set_title('Exponential Decay')
+axes[0, 1].set_xlabel('x')
+axes[0, 1].set_ylabel('exp(-x)')
+axes[0, 1].grid(True)
+
+axes[1, 0].plot(x, y3, 'g-')
+axes[1, 0].set_title('Quadratic Function')
+axes[1, 0].set_xlabel('x')
+axes[1, 0].set_ylabel('x²')
+axes[1, 0].grid(True)
+
+axes[1, 1].plot(x, y4, 'y-')
+axes[1, 1].set_title('Logarithmic Function')
+axes[1, 1].set_xlabel('x')
+axes[1, 1].set_ylabel('log(x+1)')
+axes[1, 1].grid(True)
+
+plt.tight_layout()
+plt.show()
+"""
+    
+    st.code(code6, language='python')
+    
+    # Create subplots example
+    x = np.linspace(0, 5, 100)
+    y1 = np.sin(x)
+    y2 = np.exp(-x)
+    y3 = x**2
+    y4 = np.log(x + 1)
+    
+    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+    
+    axes[0, 0].plot(x, y1, 'b-')
+    axes[0, 0].set_title('Sine Function')
+    axes[0, 0].set_xlabel('x')
+    axes[0, 0].set_ylabel('sin(x)')
+    axes[0, 0].grid(True)
+    
+    axes[0, 1].plot(x, y2, 'r-')
+    axes[0, 1].set_title('Exponential Decay')
+    axes[0, 1].set_xlabel('x')
+    axes[0, 1].set_ylabel('exp(-x)')
+    axes[0, 1].grid(True)
+    
+    axes[1, 0].plot(x, y3, 'g-')
+    axes[1, 0].set_title('Quadratic Function')
+    axes[1, 0].set_xlabel('x')
+    axes[1, 0].set_ylabel('x²')
+    axes[1, 0].grid(True)
+    
+    axes[1, 1].plot(x, y4, 'y-')
+    axes[1, 1].set_title('Logarithmic Function')
+    axes[1, 1].set_xlabel('x')
+    axes[1, 1].set_ylabel('log(x+1)')
+    axes[1, 1].grid(True)
+    
+    plt.tight_layout()
+    st.pyplot(fig)
+    
+    st.markdown("Try creating subplots:")
+    create_code_executor(code6)
+    
+    st.markdown("## Introduction to Seaborn")
+    
+    st.markdown("""
+    Seaborn is a statistical data visualization library based on Matplotlib. It provides a high-level interface for drawing attractive statistical graphics.
+    
+    Key features of Seaborn:
+    - Built-in themes for styling Matplotlib graphics
+    - Functions for visualizing univariate and bivariate distributions
+    - Tools for choosing color palettes
+    - Functions for plotting statistical time series data
+    """)
+    
+    code7 = """import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Set the theme
+sns.set_theme(style="whitegrid")
+
+# Create a dataset
+np.random.seed(42)
+tips = pd.DataFrame({
+    'total_bill': np.random.uniform(10, 50, 200),
+    'tip': np.random.uniform(1, 10, 200),
+    'sex': np.random.choice(['Male', 'Female'], 200),
+    'smoker': np.random.choice(['Yes', 'No'], 200),
+    'day': np.random.choice(['Sun', 'Sat', 'Fri', 'Thur'], 200),
+    'time': np.random.choice(['Dinner', 'Lunch'], 200),
+    'size': np.random.choice([1, 2, 3, 4, 5, 6], 200)
+})
+
+# Create a simple scatterplot
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x='total_bill', y='tip', data=tips, hue='time', style='time', s=100)
+
+plt.title('Relationship between Total Bill and Tip')
+plt.xlabel('Total Bill ($)')
+plt.ylabel('Tip ($)')
+plt.show()
+"""
+    
+    st.code(code7, language='python')
+    
+    # Create seaborn example
+    sns.set_theme(style="whitegrid")
+    
+    # Create a dataset
+    np.random.seed(42)
+    tips = pd.DataFrame({
+        'total_bill': np.random.uniform(10, 50, 200),
+        'tip': np.random.uniform(1, 10, 200),
+        'sex': np.random.choice(['Male', 'Female'], 200),
+        'smoker': np.random.choice(['Yes', 'No'], 200),
+        'day': np.random.choice(['Sun', 'Sat', 'Fri', 'Thur'], 200),
+        'time': np.random.choice(['Dinner', 'Lunch'], 200),
+        'size': np.random.choice([1, 2, 3, 4, 5, 6], 200)
+    })
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.scatterplot(x='total_bill', y='tip', data=tips, hue='time', style='time', s=100, ax=ax)
+    ax.set_title('Relationship between Total Bill and Tip')
+    ax.set_xlabel('Total Bill ($)')
+    ax.set_ylabel('Tip ($)')
+    st.pyplot(fig)
+    
+    st.markdown("## Common Seaborn Plots")
+    
+    st.markdown("### Categorical Plots")
+    
+    code8 = """import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Bar plot
+plt.figure(figsize=(10, 6))
+sns.barplot(x='day', y='total_bill', data=tips)
+plt.title('Average Total Bill by Day')
+plt.xlabel('Day')
+plt.ylabel('Average Total Bill ($)')
+plt.show()
+
+# Box plot
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='day', y='total_bill', data=tips)
+plt.title('Distribution of Total Bill by Day')
+plt.xlabel('Day')
+plt.ylabel('Total Bill ($)')
+plt.show()
+
+# Violin plot
+plt.figure(figsize=(10, 6))
+sns.violinplot(x='day', y='total_bill', data=tips, hue='time', split=True)
+plt.title('Distribution of Total Bill by Day and Time')
+plt.xlabel('Day')
+plt.ylabel('Total Bill ($)')
+plt.show()
+"""
+    
+    st.code(code8, language='python')
+    
+    # Seaborn categorical plots examples
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.barplot(x='day', y='total_bill', data=tips, ax=ax)
+    ax.set_title('Average Total Bill by Day')
+    ax.set_xlabel('Day')
+    ax.set_ylabel('Average Total Bill ($)')
+    st.pyplot(fig)
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.boxplot(x='day', y='total_bill', data=tips, ax=ax)
+    ax.set_title('Distribution of Total Bill by Day')
+    ax.set_xlabel('Day')
+    ax.set_ylabel('Total Bill ($)')
+    st.pyplot(fig)
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.violinplot(x='day', y='total_bill', data=tips, hue='time', split=True, ax=ax)
+    ax.set_title('Distribution of Total Bill by Day and Time')
+    ax.set_xlabel('Day')
+    ax.set_ylabel('Total Bill ($)')
+    st.pyplot(fig)
+    
+    st.markdown("### Distribution Plots")
+    
+    code9 = """import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Histogram with KDE
+plt.figure(figsize=(10, 6))
+sns.histplot(tips['total_bill'], kde=True, bins=20)
+plt.title('Distribution of Total Bill')
+plt.xlabel('Total Bill ($)')
+plt.ylabel('Count')
+plt.show()
+
+# KDE plot
+plt.figure(figsize=(10, 6))
+sns.kdeplot(data=tips, x='total_bill', hue='time', fill=True, common_norm=False, palette="crest", alpha=.5)
+plt.title('KDE of Total Bill by Time')
+plt.xlabel('Total Bill ($)')
+plt.ylabel('Density')
+plt.show()
+
+# Pair plot
+plt.figure(figsize=(12, 10))
+sns.pairplot(tips, hue='time', height=2.5)
+plt.suptitle('Pair Plot of Tips Dataset', y=1.02)
+plt.show()
+"""
+    
+    st.code(code9, language='python')
+    
+    # Seaborn distribution plots examples
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.histplot(tips['total_bill'], kde=True, bins=20, ax=ax)
+    ax.set_title('Distribution of Total Bill')
+    ax.set_xlabel('Total Bill ($)')
+    ax.set_ylabel('Count')
+    st.pyplot(fig)
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.kdeplot(data=tips, x='total_bill', hue='time', fill=True, common_norm=False, palette="crest", alpha=.5, ax=ax)
+    ax.set_title('KDE of Total Bill by Time')
+    ax.set_xlabel('Total Bill ($)')
+    ax.set_ylabel('Density')
+    st.pyplot(fig)
+    
+    # Pair plot (this will be larger)
+    pairgrid = sns.pairplot(tips[['total_bill', 'tip', 'size']], hue='size', height=2.5)
+    pairgrid.fig.suptitle('Pair Plot of Tips Dataset (Subset)', y=1.02)
+    st.pyplot(pairgrid.fig)
+    
+    st.markdown("Try creating seaborn plots:")
+    create_code_executor(code8)
+    
+    st.markdown("## Plotting with Pandas")
+    
+    st.markdown("""
+    Pandas has built-in plotting functionality based on Matplotlib. This provides a convenient way to visualize data directly from DataFrames:
+    """)
+    
+    code10 = """import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create a time series dataset
+dates = pd.date_range('20230101', periods=100)
+df = pd.DataFrame({
+    'A': np.random.randn(100).cumsum(),
+    'B': np.random.randn(100).cumsum(),
+    'C': np.random.randn(100).cumsum(),
+    'D': np.random.randn(100).cumsum()
+}, index=dates)
+
+# Line plot
+df.plot(figsize=(10, 6), title='Line Plot with Pandas')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.grid(True)
+plt.show()
+
+# Bar plot
+df.iloc[0:10].plot.bar(figsize=(10, 6), title='Bar Plot with Pandas')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.grid(True)
+plt.show()
+
+# Histogram
+df.plot.hist(bins=20, alpha=0.7, figsize=(10, 6), title='Histogram with Pandas')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Scatter plot
+df.plot.scatter(x='A', y='B', figsize=(10, 6), title='Scatter Plot with Pandas', 
+                c='C', cmap='viridis', s=df['D'].abs() * 100)
+plt.xlabel('A')
+plt.ylabel('B')
+plt.grid(True)
+plt.show()
+"""
+    
+    st.code(code10, language='python')
+    
+    # Pandas plotting examples
+    dates = pd.date_range('20230101', periods=100)
+    df = pd.DataFrame({
+        'A': np.random.randn(100).cumsum(),
+        'B': np.random.randn(100).cumsum(),
+        'C': np.random.randn(100).cumsum(),
+        'D': np.random.randn(100).cumsum()
+    }, index=dates)
     
     st.markdown("Line Plot Output:")
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -292,200 +563,69 @@ plt.show()
     
     st.markdown("Bar Plot Output:")
     fig, ax = plt.subplots(figsize=(10, 6))
-    df.iloc[0].plot(kind='bar', ax=ax, color='skyblue', title='Bar Plot with Pandas')
-    ax.set_xlabel('Column')
-    ax.set_ylabel('Value')
-    ax.grid(axis='y', linestyle='--', alpha=0.7)
-    st.pyplot(fig)
-    
-    st.markdown("Area Plot Output:")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    df.plot.area(ax=ax, alpha=0.5, title='Area Plot with Pandas')
+    df.iloc[0:10].plot.bar(ax=ax, title='Bar Plot with Pandas')
     ax.set_xlabel('Date')
     ax.set_ylabel('Value')
     ax.grid(True)
     st.pyplot(fig)
     
-    st.markdown("Try creating pandas visualizations:")
-    create_code_executor(code4)
-    
-    st.markdown("## Statistical Visualization with Seaborn")
-    
-    st.markdown("""
-    Seaborn is a statistical data visualization library built on top of Matplotlib. 
-    It provides a high-level interface for drawing attractive and informative statistical graphics.
-    """)
-    
-    code5 = """import seaborn as sns
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-
-# Set the theme
-sns.set_theme(style="whitegrid")
-
-# Create sample dataset
-np.random.seed(42)
-tips = pd.DataFrame({
-    'total_bill': np.random.uniform(10, 50, 100),
-    'tip': np.random.uniform(1, 10, 100),
-    'sex': np.random.choice(['Male', 'Female'], 100),
-    'smoker': np.random.choice(['Yes', 'No'], 100),
-    'day': np.random.choice(['Sun', 'Sat', 'Fri', 'Thur'], 100),
-    'time': np.random.choice(['Dinner', 'Lunch'], 100),
-    'size': np.random.choice([1, 2, 3, 4, 5, 6], 100)
-})
-
-print("Tips Dataset (first 5 rows):")
-print(tips.head())
-
-# Simple scatter plot
-plt.figure(figsize=(10, 6))
-sns.scatterplot(x='total_bill', y='tip', hue='time', style='time', 
-                s=100, data=tips)
-plt.title('Scatter Plot of Tips vs Total Bill')
-plt.show()
-
-# Regression plot
-plt.figure(figsize=(10, 6))
-sns.regplot(x='total_bill', y='tip', data=tips, scatter_kws={'alpha':0.5})
-plt.title('Regression Plot with Confidence Interval')
-plt.show()
-
-# Box plot
-plt.figure(figsize=(12, 6))
-sns.boxplot(x='day', y='total_bill', hue='time', data=tips)
-plt.title('Box Plot of Total Bill by Day and Time')
-plt.show()
-
-# Violin plot
-plt.figure(figsize=(12, 6))
-sns.violinplot(x='day', y='total_bill', hue='sex', data=tips, split=True)
-plt.title('Violin Plot of Total Bill by Day and Sex')
-plt.show()
-
-# Pair plot
-sns.pairplot(tips, hue='time', height=2.5)
-plt.suptitle('Pair Plot of Tips Dataset', y=1.02)
-plt.show()
-"""
-    
-    st.code(code5, language='python')
-    
-    # Create sample dataset for seaborn examples
-    np.random.seed(42)
-    tips = pd.DataFrame({
-        'total_bill': np.random.uniform(10, 50, 100),
-        'tip': np.random.uniform(1, 10, 100),
-        'sex': np.random.choice(['Male', 'Female'], 100),
-        'smoker': np.random.choice(['Yes', 'No'], 100),
-        'day': np.random.choice(['Sun', 'Sat', 'Fri', 'Thur'], 100),
-        'time': np.random.choice(['Dinner', 'Lunch'], 100),
-        'size': np.random.choice([1, 2, 3, 4, 5, 6], 100)
-    })
-    
-    st.markdown("Tips Dataset (first 5 rows):")
-    st.dataframe(tips.head())
+    st.markdown("Line Plot Output (safer than area plot):")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    df.plot(ax=ax, alpha=0.7, title='Line Plot with Pandas')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Value')
+    ax.grid(True)
+    st.pyplot(fig)
     
     st.markdown("Scatter Plot Output:")
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.scatterplot(x='total_bill', y='tip', hue='time', style='time', s=100, data=tips, ax=ax)
-    ax.set_title('Scatter Plot of Tips vs Total Bill')
+    df.plot.scatter(x='A', y='B', ax=ax, title='Scatter Plot with Pandas', 
+                    c='C', cmap='viridis', s=df['D'].abs() * 100)
+    ax.set_xlabel('A')
+    ax.set_ylabel('B')
+    ax.grid(True)
     st.pyplot(fig)
     
-    st.markdown("Regression Plot Output:")
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.regplot(x='total_bill', y='tip', data=tips, scatter_kws={'alpha':0.5}, ax=ax)
-    ax.set_title('Regression Plot with Confidence Interval')
-    st.pyplot(fig)
+    st.markdown("Try pandas plotting:")
+    create_code_executor(code10)
     
-    st.markdown("Box Plot Output:")
-    fig, ax = plt.subplots(figsize=(12, 6))
-    sns.boxplot(x='day', y='total_bill', hue='time', data=tips, ax=ax)
-    ax.set_title('Box Plot of Total Bill by Day and Time')
-    st.pyplot(fig)
+    st.markdown("## Exercise: Data Visualization")
     
-    st.markdown("Violin Plot Output:")
-    fig, ax = plt.subplots(figsize=(12, 6))
-    sns.violinplot(x='day', y='total_bill', hue='sex', data=tips, split=True, ax=ax)
-    ax.set_title('Violin Plot of Total Bill by Day and Sex')
-    st.pyplot(fig)
-    
-    st.markdown("Pair Plot Output:")
-    fig = sns.pairplot(tips, hue='time', height=2.5)
-    fig.fig.suptitle('Pair Plot of Tips Dataset', y=1.02)
-    st.pyplot(fig.fig)
-    
-    st.markdown("Try creating seaborn visualizations:")
-    create_code_executor(code5)
-    
-    st.markdown("## Exercises: Data Visualization")
-    
-    st.markdown("""
-    Let's practice creating some visualizations using the knowledge you've gained.
-    """)
-    
-    # First exercise
-    exercise1_solution = """import matplotlib.pyplot as plt
-import numpy as np
-
-# Data for the chart
-months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
-temperatures = [7, 9, 14, 18, 23, 27]
-
-# Create a bar chart
-plt.figure(figsize=(10, 6))
-plt.bar(months, temperatures, color='orange')
-plt.title('Average Monthly Temperatures')
-plt.xlabel('Month')
-plt.ylabel('Temperature (°C)')
-plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.show()"""
-
-    exercise1_passed = create_exercise(
-        "Create a bar chart showing the average monthly temperatures for the first half of the year. Use the following data: Jan: 7°C, Feb: 9°C, Mar: 14°C, Apr: 18°C, May: 23°C, Jun: 27°C. Add appropriate labels and a title.",
-        exercise1_solution
-    )
-    
-    # Second exercise
-    if exercise1_passed:
-        exercise2_solution = """import matplotlib.pyplot as plt
+    # Exercise for data visualization
+    exercise_solution = """import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-# Create a DataFrame with random data
-np.random.seed(42)
+# Create the dataset
 data = {
-    'Category': ['A', 'B', 'C', 'D'],
-    'Group1': np.random.randint(1, 10, 4),
-    'Group2': np.random.randint(1, 10, 4)
+    'Category': ['A', 'B', 'C', 'D', 'E'],
+    'Values': [23, 48, 17, 35, 29]
 }
 df = pd.DataFrame(data)
 
-# Create a grouped bar chart
-width = 0.35
-x = np.arange(len(df['Category']))
-
+# Create the horizontal bar chart
 plt.figure(figsize=(10, 6))
-plt.bar(x - width/2, df['Group1'], width, label='Group 1')
-plt.bar(x + width/2, df['Group2'], width, label='Group 2')
-
-plt.xlabel('Categories')
-plt.ylabel('Values')
-plt.title('Grouped Bar Chart Comparison')
-plt.xticks(x, df['Category'])
-plt.legend()
-plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.show()"""
-
-        exercise2_passed = create_exercise(
-            "Create a grouped bar chart comparing two groups across different categories. Generate random data for this exercise. Include a legend, appropriate labels, and a title.",
-            exercise2_solution
-        )
-    else:
-        exercise2_passed = False
+plt.barh(df['Category'], df['Values'], color='skyblue')
+plt.xlabel('Values')
+plt.ylabel('Category')
+plt.title('Horizontal Bar Chart')
+plt.grid(axis='x', linestyle='--', alpha=0.7)
+plt.show()
+"""
     
-    return exercise1_passed and exercise2_passed
+    exercise_passed = create_exercise(
+        """Create a horizontal bar chart using matplotlib with the following requirements:
+        
+        1. Create a DataFrame with two columns: 'Category' (letters A through E) and 'Values' (random numbers between 10 and 50)
+        2. Plot a horizontal bar chart (hint: use plt.barh)
+        3. Set appropriate labels for the x-axis, y-axis, and title
+        4. Add a grid only for the x-axis
+        5. Use 'skyblue' for the bar color
+        """,
+        exercise_solution
+    )
+    
+    return exercise_passed
 
 # Render the lesson using the utility function
 lesson_ui("Data Visualization", lesson_content)
