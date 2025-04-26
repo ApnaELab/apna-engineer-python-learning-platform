@@ -96,10 +96,7 @@ print("Hello,", name)
 """
     st.code(code4, language="python")
     
-    st.markdown("""
-    **Note:** In this interactive environment, the `input()` function won't work exactly 
-    like it does in a typical Python environment. Let's try a modified example:
-    """)
+    st.markdown("Note: In this interactive environment, the input() function won't work exactly like it does in a typical Python environment. Let's try a modified example:")
     
     code5 = """# Let's simulate input
 name = "Alice"  # Normally this would be: name = input("What is your name? ")

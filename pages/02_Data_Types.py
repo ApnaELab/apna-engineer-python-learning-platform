@@ -118,12 +118,9 @@ print(new_text)
     st.markdown("Try string methods:")
     create_code_executor(code3)
     
-    st.markdown("""
-    ## Boolean
+    st.markdown("## Boolean")
     
-    Boolean values represent truth values with two constants: `True` and `False`.
-    They're often used in conditional statements and logical operations.
-    """)
+    st.markdown("Boolean values represent truth values with two constants: `True` and `False`. They're often used in conditional statements and logical operations.")
     
     code4 = """# Boolean values
 is_active = True
