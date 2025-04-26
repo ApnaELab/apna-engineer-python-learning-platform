@@ -96,7 +96,6 @@ print("Hello,", name)
 """
     st.code(code4, language="python")
     
-    # Fixed the syntax error by using triple quotes properly
     st.markdown("""
     **Note:** In this interactive environment, the `input()` function won't work exactly 
     like it does in a typical Python environment. Let's try a modified example:
