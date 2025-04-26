@@ -2,30 +2,28 @@ import streamlit as st
 from utils import lesson_ui, create_code_executor, create_exercise
 
 def lesson_content():
-    st.markdown("""
-    # Python Basics
+    st.markdown("# Python Basics")
     
-    Welcome to your first Python lesson! Let's start with the absolute basics.
+    st.markdown("Welcome to your first Python lesson! Let's start with the absolute basics.")
     
-    ## What is Python?
+    st.markdown("## What is Python?")
     
-    Python is a high-level, interpreted programming language known for its readability and simplicity. 
+    st.markdown("""Python is a high-level, interpreted programming language known for its readability and simplicity. 
     It's widely used in:
     - Web development
     - Data analysis
     - Artificial intelligence
     - Scientific computing
-    - Automation
+    - Automation""")
     
-    ## Python Syntax
+    st.markdown("## Python Syntax")
     
-    Python is designed to be readable with a clean syntax that uses indentation 
-    (whitespace) to define code blocks. This makes Python code look neat and consistent.
+    st.markdown("""Python is designed to be readable with a clean syntax that uses indentation 
+    (whitespace) to define code blocks. This makes Python code look neat and consistent.""")
     
-    ### Hello World
+    st.markdown("### Hello World")
     
-    Let's start with the classic "Hello, World!" program:
-    """)
+    st.markdown("Let's start with the classic \"Hello, World!\" program:")
     
     code1 = """print("Hello, World!")"""
     st.code(code1, language="python")
@@ -33,12 +31,10 @@ def lesson_content():
     st.markdown("Try it yourself:")
     create_code_executor(code1)
     
-    st.markdown("""
-    ## Variables
+    st.markdown("## Variables")
     
-    Variables are containers for storing data values. Python has no command for declaring a variable. 
-    A variable is created the moment you first assign a value to it.
-    """)
+    st.markdown("""Variables are containers for storing data values. Python has no command for declaring a variable. 
+    A variable is created the moment you first assign a value to it.""")
     
     code2 = """# Creating variables
 name = "Alice"
@@ -55,14 +51,12 @@ print("Height:", height)
     st.markdown("Try creating your own variables:")
     create_code_executor(code2)
     
-    st.markdown("""
-    ## Comments
+    st.markdown("## Comments")
     
-    Comments are notes in your code that are not executed. They help explain what your code does.
+    st.markdown("""Comments are notes in your code that are not executed. They help explain what your code does.
     
     - Single-line comments start with `#`
-    - Multi-line comments are enclosed in triple quotes `'''` or `"""`
-    """)
+    - Multi-line comments are enclosed in triple quotes `'''` or `"""`""")
     
     code3 = """# This is a single-line comment
 
@@ -79,13 +73,11 @@ print(name)   # Print the name
     st.markdown("Try adding your own comments:")
     create_code_executor(code3)
     
-    st.markdown("""
-    ## Basic Input and Output
+    st.markdown("## Basic Input and Output")
     
-    Python allows you to interact with users through input and output.
+    st.markdown("""Python allows you to interact with users through input and output.
     - `print()` function displays output to the user
-    - `input()` function captures input from the user
-    """)
+    - `input()` function captures input from the user""")
     
     code4 = """# Basic output
 print("Welcome to Python!")

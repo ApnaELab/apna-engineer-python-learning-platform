@@ -193,7 +193,7 @@ except ZeroDivisionError as e:
     
     code5 = """# Define a custom exception
 class InsufficientFundsError(Exception):
-    """Raised when a withdrawal would result in a negative balance"""
+    # Raised when a withdrawal would result in a negative balance
     def __init__(self, balance, amount):
         self.balance = balance
         self.amount = amount
