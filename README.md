@@ -24,6 +24,8 @@ An interactive Python learning platform designed for beginners to learn programm
 
 ## Installation
 
+### Local Installation
+
 1. Clone this repository:
    ```
    git clone https://github.com/yourusername/python-learning-platform.git
@@ -38,7 +40,7 @@ An interactive Python learning platform designed for beginners to learn programm
 
 3. Install the required packages:
    ```
-   pip install -r requirements.txt
+   pip install -r requirements-github.txt
    ```
 
 4. Run the application:
@@ -47,6 +49,16 @@ An interactive Python learning platform designed for beginners to learn programm
    ```
 
 5. Open your browser and navigate to `http://localhost:8501`
+
+### Streamlit Cloud Deployment
+
+For cloud deployment:
+
+1. Fork or push this repository to your GitHub account
+2. Go to [Streamlit Cloud](https://share.streamlit.io/) and sign in with GitHub
+3. Click "New app" and select this repository
+4. Set the main file path to `streamlit_app.py`
+5. Click "Deploy"
 
 ## Requirements
 
